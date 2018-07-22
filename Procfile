@@ -1,0 +1,1 @@
+web: gunicorn app:app --timeout 240 --keep-alive 15 --log-level debug
