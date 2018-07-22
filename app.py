@@ -243,7 +243,7 @@ def start(bot, update):
                     pass
 
     f.close()
-	flag_stuck = True
+    flag_stuck = True
     bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=ParseMode.HTML)
     cursor.close()
     cnx.close()
