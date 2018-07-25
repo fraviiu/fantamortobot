@@ -48,7 +48,7 @@ def list(bot, update):
     tree = ET.parse('points.xml')  
     root = tree.getroot()
     for elem in root.iter('Player'):
-        str += elem.attrib['Name'] + ": " + elem.text + "\n"
+        msg += elem.attrib['Name'] + ": " + elem.text + "\n"
     bot.send_message(chat_id=update.message.chat_id, text=msg)
 
 
