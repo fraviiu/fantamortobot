@@ -36,7 +36,7 @@ def add_points(bot, update, args):
     tree = ET.parse('points.xml')  
     root = tree.getroot()
     for elem in root.iter('Player'):
-        if elem.attrib['Name'].startswith(args[0])
+        if elem.attrib['Name'].startswith(args[0]):
             int_element = int(elem.text)
             int_element += points_to_add
             elem.text = str(int_element)
