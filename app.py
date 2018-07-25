@@ -24,40 +24,31 @@ import fileinput
 from flask import Flask
 import mysql.connector
 from newsapi import NewsApiClient
+from xml.dom import minidom
+import xml.etree.ElementTree as ET
 app = Flask(__name__)
 apis = ['82a27edd809a4a938dcd84aabe835964','723f76e8b8304a90abd3b7bf77252fc2','7b32c53b7e3542c595f82601627682f6','c89ae5deecbd41f4b938d6357d448124','7cb7d677746b4b9597de82f98ea9bafe','a55367e7d13c4ad2b43e2349ac9b98aa','2accd6d19c3b410294317c2ac8d5ea70','0bda94b5cc3843ec97a730a9671ee1cd','0537de8a2d4141a0ad05091785169138','de25bd2f44d54d9a92718e0ce26b753c']
 
 def add_points(bot, update, args):
+    msg = ""
     person_to_add = args[0]
     points_to_add = int(args[1])
-    print("adding " +  points_to_add  +" to "+person_to_add)
-    with fileinput.FileInput("list_to_check.txt", inplace=True, backup='.bak') as file:
-        for line in file:
-            line = line.rstrip('\n')
-            if line[0] == '-':
-                line = line.rstrip('-')
-                words = line.split()
-                person_read = words[0]
-                points_read = int(words[1])
-                new_points = points_read + points_to_add
-                print(line.replace("-" + line+"\n", "-" + person_read + " " + str(new_points)))
-
-    fileinput.close()
+    tree = ET.parse('points.xml')  
+    root = tree.getroot()
+    for elem in root.iter('Player'):
+        if elem.attrib['Name'].startswith(args[0])
+            int_element = int(elem.text)
+            int_element += points_to_add
+            elem.text = str(int_element)
+    tree.write('points.xml') 
 
 
 def list(bot, update):
     msg = ""
-    print("Eccomi")
-    with io.open("list_to_check.txt", mode='r', encoding='utf-8') as f:
-        for line in f:
-            line = line.rstrip('\n')
-            if line[0] == '-': 
-                line = line.rstrip('-')
-               
-                words = line.split()
-                person_read = words[0]
-                points_read = words[1]
-                msg += (person_read + " " + points_read + "\n")
+    tree = ET.parse('points.xml')  
+    root = tree.getroot()
+    for elem in root.iter('Player'):
+        str += elem.attrib['Name'] + ": " + elem.text + "\n"
     bot.send_message(chat_id=update.message.chat_id, text=msg)
 
 
