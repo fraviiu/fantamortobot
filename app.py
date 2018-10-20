@@ -128,6 +128,7 @@ def start(bot, update):
     last_bot = bot
     last_update = update
     morto = emojize(":skull:", use_aliases=True)
+    red_flah = emojize(":no_entry_sign:", use_aliases=True)
     vivo = emojize(":unamused_face:", use_aliases=True)
     str = ""
     cnx = mysql.connector.connect(user='bb0daf71f80b5c', password='7b719d4b',
@@ -142,6 +143,7 @@ def start(bot, update):
             try:
                 line = line.rstrip('\n')
                 line = line.rstrip(' ')
+                
                 if line[0] == '-':
                     line = line.strip('-')
                     query = ("SELECT Punti FROM points WHERE Nome LIKE %s",(line,))
@@ -179,12 +181,17 @@ def start(bot, update):
                     else:
 
                         person = wptools.page(line, lang='it', silent=True).get_wikidata()
-
+                        
+                           
                         # print(person.wikidata['death'])
 
                         try:
                             death = person.wikidata['death']
-                            str += line + "    " + morto + "\n"
+                            str += line + "    " 
+                            if line.startswith("Ibrahim al-Asiri"):
+                                str += red_flag
+                                break 
+                            str += morto+"\n"
                         except:
                             str += line + "    " + vivo + "\n"
                         pass
