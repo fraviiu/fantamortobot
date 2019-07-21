@@ -237,9 +237,11 @@ def start(bot, update):
                 except:
                     pass
 
-    f.close()
+  
     flag_stuck = True
-    bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=ParseMode.HTML)
+    firstpart, secondpart = str[:len(str)/2], string[len(str)/2:]
+    bot.send_message(chat_id=update.message.chat_id, text=firstpart, parse_mode=ParseMode.HTML)
+    bot.send_message(chat_id=update.message.chat_id, text=secondpart, parse_mode=ParseMode.HTML)
     
 
 def isAlreadyDead(name):
