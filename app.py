@@ -131,10 +131,7 @@ def start(bot, update):
     red_flah = emojize(":no_entry_sign:", use_aliases=True)
     vivo = emojize(":unamused_face:", use_aliases=True)
     str = ""
-    cnx = mysql.connector.connect(user='bb0daf71f80b5c', password='7b719d4b',
-                              host='eu-cdbr-west-01.cleardb.com',
-                              database='heroku_773b75bc917a0c5')
-    cursor = cnx.cursor()
+
     bot.send_message(chat_id=update.message.chat_id, text="Controllo...\n")
     # bot.send_chat_action(chat_id=update.message.chat_id, action=telegram.ChatAction.TYPING)
     with io.open("list_to_check.txt", mode='r', encoding='utf-8') as f:
@@ -243,10 +240,7 @@ def start(bot, update):
     f.close()
     flag_stuck = True
     bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=ParseMode.HTML)
-    cursor.close()
-    cnx.close()
-   
-
+    
 
 def isAlreadyDead(name):
     logfile = open('list_dead.txt', 'r')
