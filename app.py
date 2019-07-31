@@ -22,8 +22,8 @@ import json
 import hashlib
 import fileinput
 from flask import Flask
-import mysql.connector
-from newsapi import NewsApiClient
+#import mysql.connector
+#from newsapi import NewsApiClient
 from xml.dom import minidom
 import xml.etree.ElementTree as ET
 app = Flask(__name__)
@@ -142,8 +142,11 @@ def start(bot, update):
                 line = line.rstrip(' ')
                 
                 if line[0] == '-':
+                    
                     line = line.strip('-')
-                    query = ("SELECT Punti FROM points WHERE Nome LIKE %s",(line,))
+                    if line.startswith("Nixon"):
+                        bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=ParseMode.HTML)
+                        str = ""
                     #cursor.execute(query)
                    # print(cursor.fetchone()[0])
                     str += "<b>" + "                                                                                                " + line.strip('-') + "    " + "</b>" + "\n"
@@ -237,11 +240,7 @@ def start(bot, update):
                 except:
                     pass
 
-  
-    flag_stuck = True
-    firstpart, secondpart = str[:len(str)/2], string[len(str)/2:]
-    bot.send_message(chat_id=update.message.chat_id, text=firstpart, parse_mode=ParseMode.HTML)
-    bot.send_message(chat_id=update.message.chat_id, text=secondpart, parse_mode=ParseMode.HTML)
+    bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=ParseMode.HTML)
     
 
 def isAlreadyDead(name):
@@ -274,4 +273,4 @@ dispatcher.add_handler(add_points_handler)
 dispatcher.add_handler(list_handler)
 dispatcher.add_handler(news_handler)
 updater.start_polling()
-#updater.idle()
+updater.idle()
