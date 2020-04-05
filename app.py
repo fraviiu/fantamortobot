@@ -262,7 +262,7 @@ def here():
 requests.packages.urllib3.disable_warnings()
 #logging.getLogger('requests').setLevel(logging.CRITICAL)
 today = datetime.today()
-updater = Updater(token='370481887:AAGpoWac80QUDJ85otXra_VcaCFBpHVj4Eo')
+updater = Updater(token='1114892777:AAFtMnozWbg7NjjiZa4PVCyel-50d0PPNyc')
 dispatcher = updater.dispatcher
 start_handler = CommandHandler('start', start)
 news_handler = CommandHandler('news',news,pass_args=True)
